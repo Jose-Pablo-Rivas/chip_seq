@@ -1,10 +1,16 @@
 working_directory: /home/josemartin/tarea_1
 
-number_of_samples: 4
-
 genome: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
 
 annotation: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.45.gtf.gz
+
+number_of_samples: 4
+
+number_of_chip: 2
+
+number_of_input: 2
+
+A continuacion se debe indicar el codigo SRA de cada muestra, asi como si es chip o input
 
 sample_chip_1: SRR7264104
 
@@ -14,6 +20,6 @@ sample_input_1: SRR7264106
 
 sample_input_2: SRR7264107
 
-number_of_chip: 2
+Se debe indicar la ruta hasta los scripts
 
-number_of_input: 2
+script: /home/josemartin/github_repos/chip_seq

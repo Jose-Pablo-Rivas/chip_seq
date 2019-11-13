@@ -32,6 +32,7 @@ GNM=$(grep genome: $PARAMS | awk '{ print $2 }' )
 ANT=$(grep annotation: $PARAMS | awk '{ print $2 }' )
 NC=$(grep number_of_chip: $PARAMS | awk '{ print $2 }' )
 NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
+SCRIPT=$(grep script: $PARAMS | awk '{ print $2 }' )
 
 echo "El directorio para el espacio de trabajo es:" $WD
 echo "El numero de muestras es:" $NS
@@ -39,6 +40,7 @@ echo "El genoma de referencia se ha obtenido de la URL:" $GNM
 echo "La anotacion se ha obtenido de la siguiente URL:" $ANT
 echo "El numero de muestras Chip es de:" $NC
 echo "El numero de muestras Input es de:" $NI
+echo "Los scripts están en:" $SCRIPT
 
 SAMPLES=()
 
@@ -99,7 +101,7 @@ do
       ((J++))
    elif [ $K -le $NI ]
    then
-       mkdir sample_input_$K
+      mkdir sample_input_$K
       ((I++))
       ((K++))
    fi
@@ -152,3 +154,24 @@ gunzip annotation.fa.gz
 
 cd $WD/genome
 bowtie2-build genome.fa index
+
+
+## Scripts sample_processing
+
+I=1
+J=1
+K=1
+while [ $I -le $NS ]
+do
+   if [ $J -le $NC ]
+   then
+      qsub -N chip_$J -o $WD/logs/chip_$J $SCRIPT/chip_seq_chip_processing.sh $J $WD $NC $NS $SCRIPT
+      ((I++))
+      ((J++))
+   elif [ $K -le $NI ]
+   then
+      qsub -N input_$K -o $WD/logs/input_$K $SCRIPT/chip_seq_input_processing.sh $K $WD $NI $NS $SCRIPT
+      ((I++))
+      ((K++))
+   fi
+done
