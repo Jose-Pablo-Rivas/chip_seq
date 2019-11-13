@@ -1,0 +1,19 @@
+working_directory: /home/josemartin/tarea_1
+
+number_of_samples: 4
+
+genome: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
+
+annotation: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.45.gtf.gz
+
+sample_chip_1: SRR7264104
+
+sample_chip_2: SRR7264105
+
+sample_input_1: SRR7264106
+
+sample_input_2: SRR7264107
+
+number_of_chip: 2
+
+number_of_input: 2
