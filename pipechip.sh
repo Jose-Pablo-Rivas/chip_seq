@@ -118,15 +118,15 @@ while [ $I -lt $NS ]
 do
    if [ $J -lt $NC ]
    then
-      fastq-dump --split-files $SAMPLE[$I] -O ./sample_chip_$(($J+1))/
-      mv ./sample_chip_$(($J+1))/$SAMPLE[$I]* ./sample_chip_$(($J+1))/chip_$(($J+1)).fq.gz
+      fastq-dump --split-files ${SAMPLE[$I]} -O ./sample_chip_$(($J+1))
+      mv ./sample_chip_$(($J+1))/${SAMPLE[$I]}* ./sample_chip_$(($J+1))/chip_$(($J+1)).fq.gz
       echo "Ya se ha descargado la muestra" chip_$(($J+1))
       ((I++))
       ((J++))
    elif [ $K -lt $NI ]
    then
-      fastq-dump --split-files $SAMPLE[$I] -O ./sample_input_$(($K+1))/
-      mv ./sample_input_$(($K+1))/$SAMPLE[$I]* ./sample_input_$(($K+1))/input_$(($K+1)).fq.gz
+      fastq-dump --split-files ${SAMPLE[$I]} -O ./sample_input_$(($K+1))
+      mv ./sample_input_$(($K+1))/${SAMPLE[$I]}* ./sample_input_$(($K+1))/input_$(($K+1)).fq.gz
       echo "Ya se ha descargado la muestra" input_$(($K+1))
       ((I++))
       ((K++))
