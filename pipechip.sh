@@ -4,7 +4,7 @@
 ##
 ## Contact: marmorper20@alum.us.es / josrivfer1@alum.us.es
 ##
-## Bioinformatica y analisis genomicos
+## Bioinformatica y analisis genomico
 ##
 ## Analisis de datos de Chip-Seq
 
@@ -12,8 +12,8 @@
 
 if [ $# -eq 0 ]
   then
-   echo "This pipeline analysis RNA-seq data"
-   echo "Usage: piperna <param_files>"
+   echo "This pipeline analysis ChIP-seq data"
+   echo "Usage: pipechip <param_files>"
    echo ""
    echo "param_file: file with the parameters specifications. Please, check test/params.txt for an example"
    echo ""
@@ -32,6 +32,7 @@ GNM=$(grep genome: $PARAMS | awk '{ print $2 }' )
 ANT=$(grep annotation: $PARAMS | awk '{ print $2 }' )
 NC=$(grep number_of_chip: $PARAMS | awk '{ print $2 }' )
 NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
+
 echo "El directorio para el espacio de trabajo es:" $WD
 echo "El numero de muestras es:" $NS
 echo "El genoma de referencia se ha obtenido de la URL:" $GNM
@@ -68,12 +69,12 @@ while [ $I -lt $NS ]
 do
    if [ $J -lt $NC ]
    then
-      echo sample_chip$(($J+1)) = ${SAMPLES[$I]}
+      echo sample_chip_$(($J+1)) = ${SAMPLES[$I]}
       ((J++))
       ((I++))
    elif [ $K -lt $NI ]
    then
-      echo sample_input$(($K+1)) = ${SAMPLES[$I]}
+      echo sample_input_$(($K+1)) = ${SAMPLES[$I]}
       ((K++))
       ((I++))
    fi
@@ -93,36 +94,40 @@ while [ $I -le $NS ]
 do
    if [ $J -le $NC ]
    then
-      mkdir sample_chip$J
+      mkdir sample_chip_$J
       ((I++))
       ((J++))
    elif [ $K -le $NI ]
    then
-       mkdir sample_input$K
+       mkdir sample_input_$K
       ((I++))
       ((K++))
    fi
 done
 
 
-
-##Copy samples
+## Downloading samples
 
 cd $WD/samples
 
 I=0
 J=0
 K=0
+
 while [ $I -lt $NS ]
 do
    if [ $J -lt $NC ]
    then
-      cp ${SAMPLES[$I]} sample_chip$(($J + 1))/Chip_$(($J + 1)).fq.gz
+      fastq-dump --split-files $SAMPLE[$I] -O ./sample_chip_$(($J+1))/
+      mv ./sample_chip_$(($J+1))/$SAMPLE[$I]* ./sample_chip_$(($J+1))/chip_$(($J+1)).fq.gz
+      echo "Ya se ha descargado la muestra" chip_$(($J+1))
       ((I++))
       ((J++))
    elif [ $K -lt $NI ]
    then
-      cp ${SAMPLES[$I]} sample_input$(($K + 1))/Input_$(($K + 1)).fq.gz
+      fastq-dump --split-files $SAMPLE[$I] -O ./sample_input_$(($K+1))/
+      mv ./sample_input_$(($K+1))/$SAMPLE[$I]* ./sample_input_$(($K+1))/input_$(($K+1)).fq.gz
+      echo "Ya se ha descargado la muestra" input_$(($K+1))
       ((I++))
       ((K++))
    fi
@@ -134,19 +139,16 @@ echo 'Las muestras 1 se corresponden con el control y las 2 con el tratamiento'
 ## Downloading reference genome
 
 cd $WD/genome
-cp $GNM genome.fa.gz
+wget -O genome.fa.gz $GNM
 gunzip genome.fa.gz
 
 ## Downloading annotation
 
 cd $WD/annotation
-cp $ANT annotation.gtf.gz
+wget -O annotation.gtf.gz $ANT
 gunzip annotation.fa.gz
 
 ## Building reference genome index
 
 cd $WD/genome
 bowtie2-build genome.fa index
-
-
-
