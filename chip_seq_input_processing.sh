@@ -31,7 +31,7 @@ bowtie2 -x $WD/genome/index -U input_${INPUT_ID}.fastq -S input_${INPUT_ID}.sam
 
 samtools view -@ 2 -S -b input_${INPUT_ID}.sam > input_${INPUT_ID}.bam
 rm input_${INPUT_ID}.sam
-samtools sort -o input_${INPUT_ID}.bam -o input_${INPUT_ID}_sorted.bam
+samtools sort input_${INPUT_ID}.bam -o input_${INPUT_ID}_sorted.bam
 samtools index input_${INPUT_ID}_sorted.bam
 
 

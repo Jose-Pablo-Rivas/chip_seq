@@ -32,7 +32,7 @@ bowtie2 -x $WD/genome/index -U chip_${CHIP_ID}.fastq -S chip_${CHIP_ID}.sam
 
 samtools view -@ 2 -S -b chip_${CHIP_ID}.sam > chip_${CHIP_ID}.bam
 rm chip_${CHIP_ID}.sam
-samtools sort -o chip_${CHIP_ID}.bam -o chip_${CHIP_ID}_sorted.bam
+samtools sort chip_${CHIP_ID}.bam -o chip_${CHIP_ID}_sorted.bam
 samtools index chip_${CHIP_ID}_sorted.bam
 
 
