@@ -28,4 +28,8 @@ do
    ((I++))
 done
 
+
+mv ../../chip_* $WD/results
+mv ../../input_* $WD/results
+
 echo "El analisis de los datos ha terminado" >> $WD/logs/finish.txt
