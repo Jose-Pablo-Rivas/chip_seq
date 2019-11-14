@@ -27,3 +27,5 @@ do
    macs callpeak -t $WD/samples/chip_$I/chip_${I}_sorted.bam -c $WD/samples/input_$I/input_${I}_sorted.bam -n 'NAME' --outdir . -f BAM
    ((I++))
 done
+
+echo "El analisis de los datos ha terminado" >> $WD/logs/finish.txt

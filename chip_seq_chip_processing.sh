@@ -24,9 +24,9 @@ cd $WD/samples/sample_chip_${CHIP_ID}
 
 ## Sample quality control and read mapping to reference genome
 
-fastqc chip_${CHIP_ID}.fq.gz
+fastqc chip_${CHIP_ID}.fq
 
-bowtie -x $WD/genome/index -U chip_${CHIP_ID}.fq.gz -S chip_${CHIP_ID}.sam
+bowtie -x $WD/genome/index -U chip_${CHIP_ID}.fq -S chip_${CHIP_ID}.sam
 
 ## Generting sorted bam file
 

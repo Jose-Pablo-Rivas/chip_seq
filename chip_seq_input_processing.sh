@@ -23,9 +23,9 @@ SCRIPT=$5
 cd $WD/samples/sample_input_${INPUT_ID}
 
 ## Sample quality control and read mapping to reference genome
-fastqc input_${INPUT_ID}.fq.gz
+fastqc input_${INPUT_ID}.fq
 
-bowtie -x $WD/genome/index -U input_${INPUT_ID}.fq.gz -S input_${INPUT_ID}.sam
+bowtie -x $WD/genome/index -U input_${INPUT_ID}.fq -S input_${INPUT_ID}.sam
 
 ## Generting sorted bam file
 
