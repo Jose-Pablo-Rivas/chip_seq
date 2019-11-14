@@ -41,7 +41,7 @@ echo "input_${INPUT_ID} DONE" >> $WD/logs/blackboard_chip_seq.txt
 
 DONE_INPUT=$(cat $WD/logs/blackboard_chip_seq.txt | grep "DONE" | wc -l)
 
-if [$DONE_INPUT -eq $NS]
+if [ ${DONE_INPUT} -eq $NS ]
 then
    qsub -N callpeak -o $WD/logs/callpeak $SCRIPT/callpeak.sh $WD $NI
 fi
