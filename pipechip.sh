@@ -144,11 +144,15 @@ cd $WD/genome
 wget -O genome.fa.gz $GNM
 gunzip genome.fa.gz
 
+echo "Ya se ha descargado el genoma"
+
 ## Downloading annotation
 
 cd $WD/annotation
 wget -O annotation.gtf.gz $ANT
 gunzip annotation.fa.gz
+
+echo "Ya se ha descargado la anotacion"
 
 ## Building reference genome index
 
