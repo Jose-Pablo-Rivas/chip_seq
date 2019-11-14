@@ -24,7 +24,7 @@ I=1
 
 while [ $I -le $NC ]
 do
-   macs callpeak -t $WD/samples/chip_$I/chip_${I}_sorted.bam -c $WD/samples/input_$I/input_${I}_sorted.bam -n 'NAME' --outdir . -f BAM
+   macs callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n 'NAME' --outdir . -f BAM
    ((I++))
 done
 
