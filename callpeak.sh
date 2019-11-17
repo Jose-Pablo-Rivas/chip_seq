@@ -24,12 +24,12 @@ I=1
 
 while [ $I -le $NC ]
 do
-   macs callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n 'NAME' --outdir . -f BAM
+   macs2 callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n 'Picos_$I' --outdir . -f BAM
    ((I++))
 done
 
-
 mv ../../chip_* $WD/results
 mv ../../input_* $WD/results
+mv ../../callpeak* $WD/results
 
 echo "El analisis de los datos ha terminado" >> $WD/logs/finish.txt
