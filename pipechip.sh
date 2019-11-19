@@ -124,15 +124,13 @@ then
    do
       if [ $J -lt $NC ]
       then
-         cp ${SAMPLES[$I]} sample_chip_$(($J + 1))/chip_$(($J + 1)).fq.gz
-         gunzip sample_chip_$(($J + 1))/chip_$(($J + 1)).fq.gz
+         cp ${SAMPLES[$I]} sample_chip_$(($J + 1))/chip_$(($J + 1)).fastq
          echo "Ya se ha copiado la muestra" chip_$(($J+1))
          ((I++))
          ((J++))
       elif [ $K -lt $NI ]
       then
-         cp ${SAMPLES[$I]} sample_input_$(($K + 1))/input_$(($K + 1)).fq.gz
-         gunzip sample_input_$(($J + 1))/input_$(($J + 1)).fq.gz
+         cp ${SAMPLES[$I]} sample_input_$(($K + 1))/input_$(($K + 1)).fastq
          echo "Ya se ha copiado la muestra" input_$(($K+1))
          ((I++))
          ((K++))
