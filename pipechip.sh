@@ -1,29 +1,29 @@
-
-## Autores: Martin Moreno-Perez y Jose Pablo Rivas-Fernandez
+## Authors: Jose Pablo Rivas-Fernandez y Martin Moreno-Perez
 ##
 ## Date: November 2019
 ##
-## Contact: marmorper20@alum.us.es / josrivfer1@alum.us.es
+## Contact: josrivfer1@alum.us.es /  marmorper20@alum.us.es
 ##
-## Bioinformatica y analisis genomico
+## ChIP-Seq Data Analysis
 ##
-## Analisis de datos de Chip-Seq
+## Pipeline script
+
 
 #! /bin/bash
 
 if [ $# -eq 0 ]
   then
-   echo "This pipeline analysis ChIP-seq data"
+   echo "This pipeline analyzes ChIP-seq Data"
    echo "Usage: pipechip <param_files>"
    echo ""
-   echo "param_file: file with the parameters specifications. Please, check test/params.txt for an example"
+   echo "param_file: file with the parameters specifications. Please, check test/params.txt for an example" # OJO con donde esta params.txt
    echo ""
-   echo "enjoy"
+   echo "Have fun!"
 
    exit 0
 fi
 
-##Loading parameters
+# Loading parameters
 
 PARAMS=$1
 
@@ -36,14 +36,26 @@ NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
 SCRIPT=$(grep script: $PARAMS | awk '{ print $2 }' )
 TEST=$(grep test: $PARAMS | awk '{ print $2 }' )
 
-echo "El directorio para el espacio de trabajo es:" $WD
-echo "El numero de muestras es:" $NS
-echo "El genoma de referencia se ha obtenido de la URL:" $GNM
-echo "La anotacion se ha obtenido de la siguiente URL:" $ANT
-echo "El numero de muestras Chip es de:" $NC
-echo "El numero de muestras Input es de:" $NI
-echo "Los scripts están en:" $SCRIPT
-echo "¿Se trata de un test?" $TEST 
+
+echo "Working directory is in:" $WD
+echo "Number of samples:" $NS
+echo "Genome downloaded/copied from:" $GNM
+echo "Annotation downloaded/copied from:" $ANT
+echo "Number of chip samples:" $NC
+echo "Number of input samples:" $NI
+echo "Scripts are in:" $SCRIPT
+echo "Is this a test?" $TEST
+
+
+#echo "El directorio para el espacio de trabajo es:" $WD
+#echo "El numero de muestras es:" $NS
+#echo "El genoma de referencia se ha obtenido de la URL:" $GNM
+#echo "La anotacion se ha obtenido de la siguiente URL:" $ANT
+#echo "El numero de muestras Chip es de:" $NC
+#echo "El numero de muestras Input es de:" $NI
+#echo "Los scripts están en:" $SCRIPT
+#echo "¿Se trata de un test?" $TEST
+
 
 SAMPLES=()
 
@@ -66,6 +78,7 @@ do
    fi
 done
 
+
 I=0
 J=0
 K=0
@@ -86,15 +99,18 @@ do
 done
 
 
-## Generate working directory
+# Generating working directory
+
 mkdir $WD
 cd $WD
 mkdir genome annotation samples results logs
 cd samples
 
+
 I=1
 J=1
 K=1
+
 while [ $I -le $NS ]
 do
    if [ $J -le $NC ]
@@ -111,7 +127,7 @@ do
 done
 
 
-## Downloading or copying samples
+# Downloading/Copying samples
 
 cd $WD/samples
 
@@ -125,13 +141,13 @@ then
       if [ $J -lt $NC ]
       then
          cp ${SAMPLES[$I]} sample_chip_$(($J + 1))/chip_$(($J + 1)).fastq
-         echo "Ya se ha copiado la muestra" chip_$(($J+1))
+         echo chip_$(($J+1)) "copied"
          ((I++))
          ((J++))
       elif [ $K -lt $NI ]
       then
          cp ${SAMPLES[$I]} sample_input_$(($K + 1))/input_$(($K + 1)).fastq
-         echo "Ya se ha copiado la muestra" input_$(($K+1))
+         echo input_$(($K+1)) "copied"
          ((I++))
          ((K++))
       fi
@@ -146,14 +162,14 @@ else
       then
          fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_chip_$(($J+1))
          mv ./sample_chip_$(($J+1))/${SAMPLES[$I]}* ./sample_chip_$(($J+1))/chip_$(($J+1)).fastq
-         echo "Ya se ha descargado la muestra" chip_$(($J+1))
+         echo chip_$(($J+1)) "downloaded"
          ((I++))
          ((J++))
       elif [ $K -lt $NI ]
       then
          fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_input_$(($K+1))
          mv ./sample_input_$(($K+1))/${SAMPLES[$I]}* ./sample_input_$(($K+1))/input_$(($K+1)).fastq
-         echo "Ya se ha descargado la muestra" input_$(($K+1))
+         echo input_$(($K+1)) "downloaded"
          ((I++))
          ((K++))
       fi
@@ -161,10 +177,11 @@ else
 fi
 
 
-echo 'Las muestras 1 se corresponden con el control y las 2 con el tratamiento'
+echo "Samples labelled with 1 are the control ones"
+echo "Samples labelled with 2 are the treatment  ones"
 
 
-## Downloading reference genome
+# Downloading reference genome
 
 cd $WD/genome
 
@@ -172,14 +189,15 @@ if [ $TEST == "TRUE" ]
 then
    cp $GNM genome.fa.gz
    gunzip genome.fa.gz
-   echo "Ya se ha copiado el genoma"
+   echo "Genome copied"
 else
    wget -O genome.fa.gz $GNM
    gunzip genome.fa.gz
-   echo "Ya se ha descargado el genoma"
+   echo "Genome downloaded"
 fi
 
-## Downloading annotation
+
+# Downloading annotation
 
 cd $WD/annotation
 
@@ -187,21 +205,21 @@ if [ $TEST == "TRUE" ]
 then
    cp $ANT annotation.gtf.gz
    gunzip annotation.fa.gz
-   echo "Ya se ha copiado la anotacion"
+   echo "Annotation copied"
 else
    wget -O annotation.gtf.gz $ANT
    gunzip annotation.fa.gz
-   echo "Ya se ha descargado la anotacion"
+   echo "Annotation downloaded"
 fi
 
 
-## Building reference genome index
+# Building reference genome index
 
 cd $WD/genome
 bowtie2-build genome.fa index
 
 
-## Scripts sample_processing
+# Executing sample processing scripts
 
 I=1
 J=1

@@ -1,16 +1,17 @@
-## Autores: Martin Moreno-Perez y Jose Pablo Rivas-Fernandez
+## Authors: Jose Pablo Rivas-Fernandez y Martin Moreno-Perez
 ##
 ## Date: November 2019
 ##
-## Contact: marmorper20@alum.us.es / josrivfer1@alum.us.es
+## Contact: josrivfer1@alum.us.es /  marmorper20@alum.us.es
 ##
-## Bioinformatica y analisis genomico
+## ChIP-Seq Data Analysis
 ##
-## Analisis de datos de Chip-Seq
+## Input procesing script
+
 
 #! /bin/bash
 
-# Reading input parameters:
+# Reading input parameters
 
 INPUT_ID=$1
 WD=$2
@@ -18,16 +19,20 @@ NI=$3
 NS=$4
 SCRIPT=$5
 
+
 # Adress sample folder
 
 cd $WD/samples/sample_input_${INPUT_ID}
 
-## Sample quality control and read mapping to reference genome
+
+# Sample quality control and read mapping to reference genome
+
 fastqc input_${INPUT_ID}.fastq
 
 bowtie2 -x $WD/genome/index -U input_${INPUT_ID}.fastq -S input_${INPUT_ID}.sam
 
-## Generting sorted bam file
+
+# Generting sorted bam file
 
 samtools view -@ 2 -S -b input_${INPUT_ID}.sam > input_${INPUT_ID}.bam
 rm input_${INPUT_ID}.sam
@@ -35,7 +40,7 @@ samtools sort input_${INPUT_ID}.bam -o input_${INPUT_ID}_sorted.bam
 samtools index input_${INPUT_ID}_sorted.bam
 
 
-# Sincronizacion
+# Synchronization
 
 echo "input_${INPUT_ID} DONE" >> $WD/logs/blackboard_chip_seq.txt
 

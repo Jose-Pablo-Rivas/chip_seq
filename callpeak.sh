@@ -1,22 +1,24 @@
-## Autores: Martin Moreno-Perez y Jose Pablo Rivas-Fernandez
+## Authors: Jose Pablo Rivas-Fernandez y Martin Moreno-Perez
 ##
 ## Date: November 2019
 ##
-## Contact: marmorper20@alum.us.es / josrivfer1@alum.us.es
+## Contact: josrivfer1@alum.us.es / marmorper20@alum.us.es
 ##
-## Bioinformatica y analisis genomico
+## ChIP-Seq Data Analysis
 ##
-## Analisis de datos de Chip-Seq
+## Callpeak script
+
 
 #! /bin/bash
 
 
-## Reading parameters
+# Reading input parameters
 
 WD=$1
 NC=$2
 
-## Llama a picos (cambiara dependiendo de los inputs y mocks que tengamos):
+
+# Callpeak function
 
 cd $WD/results
 
@@ -28,8 +30,14 @@ do
    ((I++))
 done
 
+
+# Cleaning XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 mv ../../chip_* $WD/results
 mv ../../input_* $WD/results
 mv ../../callpeak* $WD/results
 
-echo "El analisis de los datos ha terminado" >> $WD/logs/finish.txt
+
+# Finish message
+
+echo "Data Analyis is finished!" >> $WD/logs/finish.txt

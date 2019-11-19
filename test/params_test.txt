@@ -1,30 +1,37 @@
+This file contains all the parameters required to execute piperna.sh script in order to analyze ChIP_Seq Data.
+Please, make sure to leave a space after the ":"
+
+
+Please, indicate the path to the directory where you want to create the working-folder
 working_directory: /home/josemartin/tarea_1
 
+
+Please, indicate the path/url from where you want to copy/download the genome
 genome: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz
 
+
+Please, indicate the path/url from where you want to copy/download the annotation
 annotation: ftp://ftp.ensemblgenomes.org/pub/release-45/plants/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.45.gtf.gz
 
+
+Please, indicate the total number of samples and the number of chip and input samples
 number_of_samples: 2
-
 number_of_chip: 1
-
 number_of_input: 1
 
-A continuacion se debe indicar el codigo SRA de cada muestra, asi como si es chip o input
 
+Please, indicate the path/SRA to each sample and which type of sample it is
 sample_chip_1: SRR7264104
-
 sample_chip_2: SRR7264105
 
 sample_input_1: SRR7264106
-
 sample_input_2: SRR7264107
 
-Se debe indicar la ruta hasta los scripts
 
+Please, indicate the path to the folder containing the scripts
 script: /home/josemartin/github_repos/chip_seq
 
-A continuacion se indicon con YES o NO si los datos aqui recogidos se corresponden o no con un test
 
+Is this a test? (YES or NO)
 test: YES
 
