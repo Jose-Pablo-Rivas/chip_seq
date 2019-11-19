@@ -34,6 +34,7 @@ ANT=$(grep annotation: $PARAMS | awk '{ print $2 }' )
 NC=$(grep number_of_chip: $PARAMS | awk '{ print $2 }' )
 NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
 SCRIPT=$(grep script: $PARAMS | awk '{ print $2 }' )
+TEST=$(grep test: $PARAMS | awk '{ print $2 }' )
 
 echo "El directorio para el espacio de trabajo es:" $WD
 echo "El numero de muestras es:" $NS
@@ -42,6 +43,7 @@ echo "La anotacion se ha obtenido de la siguiente URL:" $ANT
 echo "El numero de muestras Chip es de:" $NC
 echo "El numero de muestras Input es de:" $NI
 echo "Los scripts están en:" $SCRIPT
+echo "¿Se trata de un test?" $TEST 
 
 SAMPLES=()
 
@@ -109,32 +111,57 @@ do
 done
 
 
-## Downloading samples
+## Downloading or copying samples
 
 cd $WD/samples
 
-I=0
-J=0
-K=0
+if [ $TEST == "YES" ]
+then
+   I=0
+   J=0
+   K=0
+   while [ $I -lt $NS ]
+   do
+      if [ $J -lt $NC ]
+      then
+         cp ${SAMPLES[$I]} sample_chip_$(($J + 1))/chip_$(($J + 1)).fq.gz
+         gunzip sample_chip_$(($J + 1))/chip_$(($J + 1)).fq.gz
+         echo "Ya se ha copiado la muestra" chip_$(($J+1))
+         ((I++))
+         ((J++))
+      elif [ $K -lt $NI ]
+      then
+         cp ${SAMPLES[$I]} sample_input_$(($K + 1))/input_$(($K + 1)).fq.gz
+         gunzip sample_input_$(($J + 1))/input_$(($J + 1)).fq.gz
+         echo "Ya se ha copiado la muestra" input_$(($K+1))
+         ((I++))
+         ((K++))
+      fi
+   done
+else
+   I=0
+   J=0
+   K=0
+   while [ $I -lt $NS ]
+   do
+      if [ $J -lt $NC ]
+      then
+         fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_chip_$(($J+1))
+         mv ./sample_chip_$(($J+1))/${SAMPLES[$I]}* ./sample_chip_$(($J+1))/chip_$(($J+1)).fastq
+         echo "Ya se ha descargado la muestra" chip_$(($J+1))
+         ((I++))
+         ((J++))
+      elif [ $K -lt $NI ]
+      then
+         fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_input_$(($K+1))
+         mv ./sample_input_$(($K+1))/${SAMPLES[$I]}* ./sample_input_$(($K+1))/input_$(($K+1)).fastq
+         echo "Ya se ha descargado la muestra" input_$(($K+1))
+         ((I++))
+         ((K++))
+      fi
+   done
+fi
 
-while [ $I -lt $NS ]
-do
-   if [ $J -lt $NC ]
-   then
-      fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_chip_$(($J+1))
-      mv ./sample_chip_$(($J+1))/${SAMPLES[$I]}* ./sample_chip_$(($J+1))/chip_$(($J+1)).fastq
-      echo "Ya se ha descargado la muestra" chip_$(($J+1))
-      ((I++))
-      ((J++))
-   elif [ $K -lt $NI ]
-   then
-      fastq-dump --split-files ${SAMPLES[$I]} -O ./sample_input_$(($K+1))
-      mv ./sample_input_$(($K+1))/${SAMPLES[$I]}* ./sample_input_$(($K+1))/input_$(($K+1)).fastq
-      echo "Ya se ha descargado la muestra" input_$(($K+1))
-      ((I++))
-      ((K++))
-   fi
-done
 
 echo 'Las muestras 1 se corresponden con el control y las 2 con el tratamiento'
 
@@ -142,18 +169,33 @@ echo 'Las muestras 1 se corresponden con el control y las 2 con el tratamiento'
 ## Downloading reference genome
 
 cd $WD/genome
-wget -O genome.fa.gz $GNM
-gunzip genome.fa.gz
 
-echo "Ya se ha descargado el genoma"
+if [ $TEST == "TRUE" ]
+then
+   cp $GNM genome.fa.gz
+   gunzip genome.fa.gz
+   echo "Ya se ha copiado el genoma"
+else
+   wget -O genome.fa.gz $GNM
+   gunzip genome.fa.gz
+   echo "Ya se ha descargado el genoma"
+fi
 
 ## Downloading annotation
 
 cd $WD/annotation
-wget -O annotation.gtf.gz $ANT
-gunzip annotation.fa.gz
 
-echo "Ya se ha descargado la anotacion"
+if [ $TEST == "TRUE" ]
+then
+   cp $ANT annotation.gtf.gz
+   gunzip annotation.fa.gz
+   echo "Ya se ha copiado la anotacion"
+else
+   wget -O annotation.gtf.gz $ANT
+   gunzip annotation.fa.gz
+   echo "Ya se ha descargado la anotacion"
+fi
+
 
 ## Building reference genome index
 

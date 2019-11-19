@@ -23,3 +23,7 @@ sample_input_2: SRR7264107
 Se debe indicar la ruta hasta los scripts
 
 script: /home/josemartin/github_repos/chip_seq
+
+A continuacion se indicon con YES o NO si los datos aqui recogidos se corresponden o no con un test
+
+test: 
