@@ -49,5 +49,18 @@ DONE_INPUT=$(cat $WD/logs/blackboard_chip_seq.txt | grep "DONE" | wc -l)
 
 if [ $DONE_INPUT -eq $NS ]
 then
-   qsub -N callpeak -o $WD/logs/callpeak $SCRIPT/callpeak.sh $WD $NI
+   # Callpeak function
+   cd $WD/results
+   I=1
+   while [ $I -le $NC ]
+   do
+      macs2 callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n 'Picos_$I' --outdir . -f BAM
+      ((I++))
+   done
+   # Cleaning XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   mv ../../chip_* $WD/results
+   mv ../../input_* $WD/results
+   mv ../../callpeak* $WD/results
+   # Finish message
+   echo "Data Analyis is finished!" >> $WD/logs/finish.txt
 fi

@@ -11,28 +11,28 @@
 
 #! /bin/bash
 
-if [ -d $HOME/opt/ ]
+if [ -d $HOME/prueba/ ]
 then
-   mkdir $HOME/opt/pipechip_josemartin
-   mv ./pipechip.sh $HOME/opt/pipechip_josemartin/
-   mv ./chip_seq_chip_processing.sh $HOME/opt/pipechip_josemartin
-   mv ./chip_seq_input_processing.sh $HOME/opt/pipechip_josemartin
-   mv ./callpeak.sh $HOME/opt/pipechip_josemartin
-   mkdir $HOME/opt/pipechip_josemartin/test/
-   mv ./prr5_samples.zip $HOME/opt/pipechip_josemartin/test/
-   cd $HOME/opt/pipechip_josemartin/test/
+   mkdir $HOME/prueba/pipechip_josemartin
+   mv ./pipechip.sh $HOME/prueba/pipechip_josemartin/
+   mv ./chip_seq_chip_processing.sh $HOME/prueba/pipechip_josemartin
+   mv ./chip_seq_input_processing.sh $HOME/prueba/pipechip_josemartin
+   mv ./callpeak.sh $HOME/prueba/pipechip_josemartin
+   mkdir $HOME/prueba/pipechip_josemartin/test/
+   mv ./prr5_samples.zip $HOME/prueba/pipechip_josemartin/test/
+   cd $HOME/prueba/pipechip_josemartin/test/
    unzip prr5_samples.zip
    rm prr5_samples.zip
 else
-   mkdir $HOME/opt/
-   mkdir $HOME/opt/pipechip_josemartin
-   mv ./pipechip.sh $HOME/opt/pipechip_josemartin/
-   mv ./chip_seq_chip_processing.sh $HOME/opt/pipechip_josemartin
-   mv ./chip_seq_input_processing.sh $HOME/opt/pipechip_josemartin
-   mv ./callpeak.sh $HOME/opt/pipechip_josemartin
-   mkdir $HOME/opt/pipechip_josemartin/test/
-   mv ./prr5_samples.zip $HOME/opt/pipechip_josemartin/test/
-   cd $HOME/opt/pipechip_josemartin/test/
+   mkdir $HOME/prueba/
+   mkdir $HOME/prueba/pipechip_josemartin
+   mv ./pipechip.sh $HOME/prueba/pipechip_josemartin/
+   mv ./chip_seq_chip_processing.sh $HOME/prueba/pipechip_josemartin
+   mv ./chip_seq_input_processing.sh $HOME/prueba/pipechip_josemartin
+   mv ./callpeak.sh $HOME/prueba/pipechip_josemartin
+   mkdir $HOME/prueba/pipechip_josemartin/test/
+   mv ./prr5_samples.zip $HOME/prueba/pipechip_josemartin/test/
+   cd $HOME/prueba/pipechip_josemartin/test/
    unzip prr5_samples.zip
    rm prr5_samples.zip
 fi
