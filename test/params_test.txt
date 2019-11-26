@@ -2,17 +2,35 @@ This file contains all the parameters required to execute piperna.sh script in o
 Please, make sure to leave a space after the ":"
 
 
-Please, indicate the path to the directory where you want to create the working-folder
-working_directory: $HOME/prueba/pipechip_josemartin
+Is this a test? (YES or NO)
+test: YES
 
+
+WORKING DIRECTORY
+
+Please, indicate the path to the directory where you want to create the working-folder
+working_directory: home/josemartin/prueba/pipechip_josemartin
+
+
+GENOME
+
+Do you want to copy the genome? (YES or NO, if the answer is NO it will be downloaded)
+genome_question: YES
 
 Please, indicate the path/url from where you want to copy/download the genome
-genome: $HOME/prueba/pipechip_josemartin/prr5_samples/genome/genome.fa
+genome: home/josemartin/prueba/pipechip_josemartin/prr5_samples/genome/genome.fa
 
+
+ANNOTATION
+
+Do you want to copy the annotation? (YES or NO, if the answer is NO it will be downloaded)
+annotation_question: YES
 
 Please, indicate the path/url from where you want to copy/download the annotation
-annotation: $HOME/prueba/pipechip_josemartin/prr5_samples/annotation/annotation.gtf
+annotation: home/josemartin/prueba/pipechip_josemartin/prr5_samples/annotation/annotation.gtf
 
+
+SAMPLES
 
 Please, indicate the total number of samples and the number of chip and input samples
 number_of_samples: 2
@@ -21,15 +39,14 @@ number_of_input: 1
 
 
 Please, indicate the path/SRA to each sample and which type of sample it is
-sample_chip_1: $HOME/prueba/pipechip_josemartin/prr5_samples/samples/chip/chip_pr$
+sample_chip_1: home/<USER>/prueba/pipechip_josemartin/prr5_samples/samples/chip/chip_prr5_chr1.fastq
+sample_chip_2:
 
-sample_input_1: $HOME/prueba/pipechip_josemartin/prr5_samples/samples/input/input_prr5_chr1.fastq
+sample_input_1: home/josemartin/prueba/pipechip_josemartin/prr5_samples/samples/input/input_prr5_chr1.fastq
+
+sample_input_2:
 
 
-Please, indicate the path to the folder containing the scripts
-script: $HOME/prueba/pipechip_josemartin/
+SCRIPT
 
-
-Is this a test? (YES or NO)
-test: YES
 

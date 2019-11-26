@@ -29,7 +29,9 @@ PARAMS=$1
 
 WD=$(grep working_directory: $PARAMS | awk '{ print $2 }' )
 NS=$(grep number_of_samples: $PARAMS | awk '{ print $2 }' )
+QGNM=$(grep genome_question: $PARAMS | awk '{ print $2 }' )
 GNM=$(grep genome: $PARAMS | awk '{ print $2 }' )
+QANT=$(grep annotation_question: $PARAMS | awk '{ print $2 }' )
 ANT=$(grep annotation: $PARAMS | awk '{ print $2 }' )
 NC=$(grep number_of_chip: $PARAMS | awk '{ print $2 }' )
 NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
@@ -37,14 +39,31 @@ SCRIPT=$(grep script: $PARAMS | awk '{ print $2 }' )
 TEST=$(grep test: $PARAMS | awk '{ print $2 }' )
 
 
+
+echo "Is this a test?" $TEST
+
 echo "Working directory is in:" $WD
 echo "Number of samples:" $NS
-echo "Genome downloaded/copied from:" $GNM
-echo "Annotation downloaded/copied from:" $ANT
+
+if [ $QGNM == "YES" ]
+then
+   echo "Genome copied from:" $GNM
+else
+   echo "Genome downloaded from" $GNM
+fi
+
+
+if [ $QANT == "YES" ]
+then
+   echo "Annotation copied from:" $ANT
+else
+   echo "Annotation downloaded from" $ANT
+fi
+
 echo "Number of chip samples:" $NC
 echo "Number of input samples:" $NI
 echo "Scripts are in:" $SCRIPT
-echo "Is this a test?" $TEST
+
 
 
 #echo "El directorio para el espacio de trabajo es:" $WD
@@ -185,7 +204,7 @@ echo "Samples labelled with 2 are the treatment  ones"
 
 cd $WD/genome
 
-if [ $TEST == "TRUE" ]
+if [ $QGNM == "YES" ]
 then
    cp $GNM genome.fa.gz
    gunzip genome.fa.gz
@@ -201,7 +220,7 @@ fi
 
 cd $WD/annotation
 
-if [ $TEST == "TRUE" ]
+if [ $QANT == "YES" ]
 then
    cp $ANT annotation.gtf.gz
    gunzip annotation.fa.gz
