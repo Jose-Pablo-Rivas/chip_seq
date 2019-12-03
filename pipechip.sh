@@ -206,8 +206,8 @@ cd $WD/genome
 
 if [ $QGNM == "YES" ]
 then
-   cp $GNM genome.fa.gz
-   gunzip genome.fa.gz
+   cp $GNM genome.fa
+## We will only use the command "gunzip genome.fa.gz" if the file is packed.
    echo "Genome copied"
 else
    wget -O genome.fa.gz $GNM
@@ -222,8 +222,8 @@ cd $WD/annotation
 
 if [ $QANT == "YES" ]
 then
-   cp $ANT annotation.gtf.gz
-   gunzip annotation.fa.gz
+   cp $ANT annotation.gtf
+## we wil only use the command "gunzip annotation.fa.gz" if the file is packed.
    echo "Annotation copied"
 else
    wget -O annotation.gtf.gz $ANT
