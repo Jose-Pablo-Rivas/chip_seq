@@ -5,11 +5,6 @@
 ## Fecha: Octubre 2019
 
 ## Instalar chipseeker y paquete de anotación de Arabidopsis thaliana
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-
-BiocManager::install("ChIPseeker")
-BiocManager::install("TxDb.Athaliana.BioMart.plantsmart28")
 
 library(ChIPseeker)
 library(TxDb.Athaliana.BioMart.plantsmart28)
@@ -56,17 +51,10 @@ write(x = target.genes,file = "prr5_target_genes.txt")
 
 # Con HOMER encontraremos los Transcription Factors Binding Sites.
 
-BiocManager::install("clusterProfiler")
-
 library("clusterProfiler")
-
-BiocManager::install("org.At.tair.db")
 
 library("org.At.tair.db")
 
-BiocManager::install("topGO")
-
-library("topGO")
 
 
 # Leemos los genes desde su fichero.
@@ -81,6 +69,8 @@ ath.genes$seqnames
 ath.genes$seqnames == 1
 ath.genes$gene_id
 genes.chr1<- (ath.genes$gene_id)[ath.genes$seqnames == 1]
+
+library("topGO")
 
 
 # ENRIQUECIMIENTO GO
