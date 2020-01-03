@@ -17,6 +17,7 @@ txdb <- TxDb.Athaliana.BioMart.plantsmart28
 args <- commandArgs(trailingOnly = T)
 peaks <- args[[1]]
 directory <- args[[2]]
+length_promotor <- args[[3]]
 
 setwd(directory)
 
@@ -25,13 +26,13 @@ prr5.peaks
 
 ## Definir la región que se considera promotor entorno al TSS
 promoter <- getPromoters(TxDb=txdb, 
-                         upstream=1000, 
-                         downstream=1000)
+                         upstream=length_promotor, 
+                         downstream=length_promotor)
 promoter
 
 ## Anotación de los picos
 prr5.peakAnno <- annotatePeak(peak = prr5.peaks, 
-                             tssRegion=c(-1000, 1000),
+                             tssRegion=c(-lenght_promotor, length_promotor),
                              TxDb=txdb)
 prr5.peakAnno
 

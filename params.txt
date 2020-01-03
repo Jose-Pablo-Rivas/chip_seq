@@ -45,3 +45,8 @@ sample_chip_2:
 sample_input_1: /home/josemartin/prueba/pipechip_josemartin/test/prr5_samples/samples/input/input_prr5_chr1.fastq
 
 sample_input_2:
+
+R
+
+Please, indicate the length you want to take for the promotor that will be use in the R analyze.
+length_promotor: 1000

@@ -18,6 +18,7 @@ WD=$2
 NI=$3
 NS=$4
 SCRIPT=$5
+LPROM=$6
 
 
 # Adress sample folder
@@ -57,7 +58,7 @@ then
       macs2 callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n Picos_$I --outdir . -f BAM
       ((I++))
    done
-   # Cleaning XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   # Cleaning 
    mv ../../chip_* $WD/results
    mv ../../input_* $WD/results
    # Finish message
@@ -67,7 +68,7 @@ then
 
    mkdir $WD/results/R_analysis
 
-   Rscript $SCRIPT/test/chip_seq_prr5.R $WD/results/Picos_1_peaks.narrowPeak $WD/results/R_analysis
+   Rscript $SCRIPT/test/chip_seq_prr5.R $WD/results/Picos_1_peaks.narrowPeak $WD/results/R_analysis $LPROM
 
    ## Motifs analises by Hommer
 

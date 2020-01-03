@@ -37,6 +37,7 @@ NC=$(grep number_of_chip: $PARAMS | awk '{ print $2 }' )
 NI=$(grep number_of_input: $PARAMS | awk '{ print $2 }' )
 SCRIPT=$(grep script: $PARAMS | awk '{ print $2 }' )
 TEST=$(grep test: $PARAMS | awk '{ print $2 }' )
+LPROM=$(grep length_promotor: $PARAMS | awk '{ print $2 }' )
 
 
 
@@ -247,12 +248,12 @@ while [ $I -le $NS ]
 do
    if [ $J -le $NC ]
    then
-      qsub -N chip_$J -o $WD/logs/chip_$J $SCRIPT/chip_seq_chip_processing.sh $J $WD $NC $NS $SCRIPT
+      qsub -N chip_$J -o $WD/logs/chip_$J $SCRIPT/chip_seq_chip_processing.sh $J $WD $NC $NS $SCRIPT $LPROM
       ((I++))
       ((J++))
    elif [ $K -le $NI ]
    then
-      qsub -N input_$K -o $WD/logs/input_$K $SCRIPT/chip_seq_input_processing.sh $K $WD $NI $NS $SCRIPT
+      qsub -N input_$K -o $WD/logs/input_$K $SCRIPT/chip_seq_input_processing.sh $K $WD $NI $NS $SCRIPT $LPROM
       ((I++))
       ((K++))
    fi
