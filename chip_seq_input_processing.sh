@@ -54,13 +54,25 @@ then
    I=1
    while [ $I -le $NC ]
    do
-      macs2 callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n 'Picos_$I' --outdir . -f BAM
+      macs2 callpeak -t $WD/samples/sample_chip_$I/chip_${I}_sorted.bam -c $WD/samples/sample_input_$I/input_${I}_sorted.bam -n Picos_$I --outdir . -f BAM
       ((I++))
    done
    # Cleaning XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
    mv ../../chip_* $WD/results
    mv ../../input_* $WD/results
-   mv ../../callpeak* $WD/results
    # Finish message
    echo "Data Analyis is finished!" >> $WD/logs/finish.txt
+
+   ## Analisys of the R Script
+
+   mkdir $WD/results/R_analysis
+
+   Rscript $SCRIPT/test/chip_seq_prr5.R $WD/results/Picos_1_peaks.narrowPeak $WD/results/R_analysis
+
+   ## Motifs analises by Hommer
+
+   mkdir $WD/results/Homer
+   findMotifsGenome.pl $WD/results/Picos_1_summits.bed tair10 $WD/results/Homer -size 60
 fi
+
+

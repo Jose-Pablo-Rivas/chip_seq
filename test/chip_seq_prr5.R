@@ -13,7 +13,14 @@ txdb <- TxDb.Athaliana.BioMart.plantsmart28
 
 
 ## Leer fichero de picos
-prr5.peaks <- readPeakFile(peakfile = "prr5_peaks.narrowPeak",header=FALSE)
+
+args <- commandArgs(trailingOnly = T)
+peaks <- args[[1]]
+directory <- args[[2]]
+
+setwd(directory)
+
+prr5.peaks <- readPeakFile(peakfile = peaks, header=FALSE)
 prr5.peaks
 
 ## Definir la región que se considera promotor entorno al TSS
@@ -59,15 +66,15 @@ library("org.At.tair.db")
 
 # Leemos los genes desde su fichero.
 gene.set<- read.table(file = "prr5_target_genes.txt", header = F, as.is = T)[[1]]
-gene.set
+# gene.set
 
 # Necesitaremos el universo del cual realizaremos los enriquecimientos, en nuestro caso
 # serán los genes del cromosoma 1 de A. thaliana.
 
 ath.genes<- as.data.frame(genes(txdb))
-ath.genes$seqnames
-ath.genes$seqnames == 1
-ath.genes$gene_id
+#ath.genes$seqnames
+#ath.genes$seqnames == 1
+#ath.genes$gene_id
 genes.chr1<- (ath.genes$gene_id)[ath.genes$seqnames == 1]
 
 library("topGO")
@@ -77,17 +84,17 @@ library("topGO")
 
 idType(OrgDb = org.At.tair.db)
 
-e<- enrichGO(gene = gene.set,
-             OrgDb = org.At.tair.db,
-             keyType = "TAIR",
-             ont = "ALL",
-             pvalueCutoff = 0.05,
-             pAdjustMethod = 0.05,
-             universe = genes.chr1)
+# e<- enrichGO(gene = gene.set,
+#              OrgDb = org.At.tair.db,
+#              keyType = "TAIR",
+#              ont = "ALL",
+#              pvalueCutoff = 0.05,
+#              pAdjustMethod = 0.05,
+#              universe = genes.chr1)
 
-summary(e)
+# summary(e)
 
-e@geneSets
+# e@geneSets
 
 # Para realizar los enriquecimientos por separado:
 #       BP (biological process),
@@ -165,18 +172,15 @@ e.kegg.table <- as.data.frame(e.kegg)
 head(e.kegg.table)
 
 
-
-BiocManager::install("pathview")
-
 library("pathview")
 
 # Preparación de los genes
 
 my.universe<- rep(0, length(genes.chr1))
 names(my.universe) <- genes.chr1
-my.universe
+#my.universe
 my.universe[gene.set] <- 1
-my.universe
+#my.universe
 
 # Path.id de cada función (en la función anterior)
 
