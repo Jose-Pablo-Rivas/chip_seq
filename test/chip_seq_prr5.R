@@ -1,8 +1,8 @@
 ## Script para determinar los genes dianas de un factor de transcripción
 ## a partir del fichero narrowPeak generado por MaCS2.
 
-## Autor: Francisco J. Romero-Campero - fran@us.es
-## Fecha: Octubre 2019
+## Autor: Martín Moreno-Pérez y José Pablo Rivas-Fernández - marmorper20@alum.us.es y josrivfer1@alum.us.es
+## Fecha: Noviembre 2019
 
 ## Instalar chipseeker y paquete de anotación de Arabidopsis thaliana
 
@@ -17,7 +17,7 @@ txdb <- TxDb.Athaliana.BioMart.plantsmart28
 args <- commandArgs(trailingOnly = T)
 peaks <- args[[1]]
 directory <- args[[2]]
-length_promotor <- args[[3]]
+length_promotor <- as.numeric(args[[3]])
 
 setwd(directory)
 
@@ -32,7 +32,7 @@ promoter
 
 ## Anotación de los picos
 prr5.peakAnno <- annotatePeak(peak = prr5.peaks, 
-                             tssRegion=c(-length_promotor, length_promotor),
+                             tssRegion=c(-1000, 1000),
                              TxDb=txdb)
 prr5.peakAnno
 
