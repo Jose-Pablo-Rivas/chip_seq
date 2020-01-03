@@ -9,7 +9,7 @@ test: YES
 WORKING DIRECTORY
 
 Please, indicate the path to the directory where you want to create the working-folder
-working_directory: /home/josemartin/ensayo
+working_directory: /home/<USER>/analisis_prr5
 
 
 GENOME
@@ -18,7 +18,7 @@ Do you want to copy the genome? (YES or NO, if the answer is NO it will be downl
 genome_question: YES
 
 Please, indicate the path/url from where you want to copy/download the genome
-genome: /home/josemartin/prueba/pipechip_josemartin/test/prr5_samples/genome/chromosome1.fa
+genome: /home/<USER>/pipechip_josemartin/test/prr5_samples/genome/chromosome1.fa
 
 
 ANNOTATION
@@ -27,7 +27,7 @@ Do you want to copy the annotation? (YES or NO, if the answer is NO it will be d
 annotation_question: YES
 
 Please, indicate the path/url from where you want to copy/download the annotation
-annotation: /home/josemartin/prueba/pipechip_josemartin/test/prr5_samples/annotation/chromosome1.gtf
+annotation: /home/<USER>/pipechip_josemartin/test/prr5_samples/annotation/chromosome1.gtf
 
 
 SAMPLES
@@ -39,10 +39,10 @@ number_of_input: 1
 
 
 Please, indicate the path/SRA to each sample and which type of sample it is
-sample_chip_1: /home/josemartin/prueba/pipechip_josemartin/test/prr5_samples/samples/chip/chip_prr5_chr1.fastq
+sample_chip_1: /home/<USER>/pipechip_josemartin/test/prr5_samples/samples/chip/chip_prr5_chr1.fastq
 sample_chip_2:
 
-sample_input_1: /home/josemartin/prueba/pipechip_josemartin/test/prr5_samples/samples/input/input_prr5_chr1.fastq
+sample_input_1: /home/<USER>/pipechip_josemartin/test/prr5_samples/samples/input/input_prr5_chr1.fastq
 
 sample_input_2:
 
