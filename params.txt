@@ -50,3 +50,5 @@ R
 
 Please, indicate the length you want to take for the promotor that will be use in the R analyze.
 length_promotor: 1000
+
+SCRIPT

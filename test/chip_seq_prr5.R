@@ -32,7 +32,7 @@ promoter
 
 ## Anotación de los picos
 prr5.peakAnno <- annotatePeak(peak = prr5.peaks, 
-                             tssRegion=c(-lenght_promotor, length_promotor),
+                             tssRegion=c(-length_promotor, length_promotor),
                              TxDb=txdb)
 prr5.peakAnno
 
