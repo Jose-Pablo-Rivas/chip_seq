@@ -22,6 +22,8 @@ then
    mv ./test/prr5_samples.zip $HOME/pipechip_josemartin/test/
    mv ./test/chip_seq_prr5.R $HOME/pipechip_josemartin/test/
    rm -r ./test
+   cd $HOME/pipechip_josemartin/
+   chmod +x pipechip.sh chip_seq_chip_processing.sh chip_seq_input_processing.sh
    cd $HOME/pipechip_josemartin/test/
    unzip prr5_samples.zip
    rm prr5_samples.zip
@@ -36,6 +38,8 @@ else
    mv ./test/prr5_samples.zip $HOME/pipechip_josemartin/test/
    mv ./test/chip_seq_prr5.R $HOME/pipechip_josemartin/test/
    rm -r ./test
+   cd $HOME/pipechip_josemartin/
+   chmod +x pipechip.sh chip_seq_chip_processing.sh chip_seq_input_processing.sh
    cd $HOME/pipechip_josemartin/test/
    unzip prr5_samples.zip
    rm prr5_samples.zip
