@@ -1,4 +1,4 @@
-This file contains all the parameters required to execute piperna.sh script in order to analyze ChIP_Seq Data.
+This file contains all the parameters required to execute pipechip.sh script in order to analyze ChIP_Seq Data.
 Please, make sure to leave a space after the ":"
 
 
@@ -48,7 +48,7 @@ sample_input_2:
 
 R
 
-Please, indicate the length you want to take for the promotor that will be use in the R analyze.
+Please, indicate the length you want to take for the promotor that will be use in the R analysis.
 length_promotor: 1000
 
 SCRIPT
