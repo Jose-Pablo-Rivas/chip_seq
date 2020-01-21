@@ -23,6 +23,10 @@ parameters to the pipeline.
 
 In the file "params.txt" the words that are between < > need to be changed by the user. 
 
+We also have a tutorial on YouTube in which you can learn how to install and run the pipeline. The link is under:
+
+https://youtu.be/6VlC_B-KmVQ
+
 We hope that the pipeline will be usefull for you. 
 
 Enjoy it and have fun!
