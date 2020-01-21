@@ -53,4 +53,4 @@ echo "script:" $SWD >> params.txt
 
 echo "The installation has finished"
 
-# rm ./install_test.sh
+rm ./install_test.sh
