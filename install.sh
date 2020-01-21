@@ -52,5 +52,3 @@ SWD=$(pwd)
 echo "script:" $SWD >> params.txt
 
 echo "The installation has finished"
-
-rm ./install.sh
