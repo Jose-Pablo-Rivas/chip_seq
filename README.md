@@ -17,7 +17,7 @@ and chip_seq_input_processing.sh. These two scripts process all samples in paral
 All scripts explains in a little way what they are doing in each step with a short definition above each command. It could be good to have a look to the 
 scripts before running them.
 
-The file "params.txt" contains all the parameters requiered to analyze the data. The parameters that are by default are for the prr5 samples analysis.
+The file "params.txt" contains all the parameters requiered to analyze the data. The parameters by default are for the prr5 samples analysis.
 If you want to make a different study, you must change the parameters to those that agree with your study. If you add more parameters, you must add more 
 parameters to the pipeline.
 
