@@ -3,6 +3,10 @@ order to identify the binding sites of DNA-associated proteins.
 
 After downloading the material from GitHub, you must run the file - install.sh - .
 
+We have a tutorial on YouTube in which you can learn how to install and run the pipeline. The link is under:
+
+https://youtu.be/6VlC_B-KmVQ
+
 This script is not executable. You can make it executable by typing the following command in the terminal and in the directory where 
 the script is: " chmod +x install.sh ". After that, you will be able to run the script and follow the next steps. 
 
@@ -22,10 +26,6 @@ If you want to make a different study, you must change the parameters to those t
 parameters to the pipeline.
 
 In the file "params.txt" the words that are between < > need to be changed by the user. 
-
-We also have a tutorial on YouTube in which you can learn how to install and run the pipeline. The link is under:
-
-https://youtu.be/6VlC_B-KmVQ
 
 We hope that the pipeline will be usefull for you. 
 
