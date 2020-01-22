@@ -18,6 +18,7 @@ then
    mv ./chip_seq_input_processing.sh $HOME/pipechip_josemartin
    mv ./params.txt $HOME/pipechip_josemartin
    mv ./README.md $HOME/pipechip_josemartin
+   mv ./LICENSE $HOME/pipechip_josemartin
    mkdir $HOME/pipechip_josemartin/test/
    mv ./test/prr5_samples.zip $HOME/pipechip_josemartin/test/
    mv ./test/chip_seq_prr5.R $HOME/pipechip_josemartin/test/
@@ -34,6 +35,7 @@ else
    mv ./chip_seq_input_processing.sh $HOME/pipechip_josemartin
    mv ./params.txt $HOME/pipechip_josemartin
    mv ./README.md $HOME/pipechip_josemartin
+   mv ./LICENSE $HOME/pipechip_josemartin
    mkdir $HOME/pipechip_josemartin/test/
    mv ./test/prr5_samples.zip $HOME/pipechip_josemartin/test/
    mv ./test/chip_seq_prr5.R $HOME/pipechip_josemartin/test/
